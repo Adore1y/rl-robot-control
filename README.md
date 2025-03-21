@@ -1,14 +1,50 @@
-# 基于深度强化学习的工业机器人智能控制系统
+# RL-Robot-Control
 
-本项目实现了一个基于深度强化学习的工业机器人控制系统，能够在复杂环境下实现自适应控制与优化决策，提高机器人操作精度与任务完成效率。
+基于深度强化学习的工业机器人智能控制系统。该项目使用PPO等先进的强化学习算法，实现了机器人在工业环境中的智能控制。
 
-## 主要特点
+## 项目结构
 
-- 基于PyTorch实现多种深度强化学习算法(PPO, SAC, TD3)
-- 使用PyBullet构建高精度的工业机器人仿真环境
-- 支持多种工业任务场景(抓取放置、轨迹跟踪等)
-- 完整的实验分析与可视化工具
-- 模块化设计，易于扩展和定制
+```
+rl-robot-control/
+│
+├── agents/                  # 强化学习代理实现
+│   ├── __init__.py
+│   ├── base_agent.py        # 代理基类
+│   └── ppo_agent.py         # PPO算法实现
+│
+├── configs/                 # 配置文件
+│   └── ppo_config.yaml      # PPO算法配置
+│
+├── environments/            # 仿真环境
+│   ├── __init__.py
+│   ├── robot_env.py         # 机器人环境基类
+│   └── tasks/               # 特定任务实现
+│       ├── __init__.py
+│       └── pick_place.py    # 抓取与放置任务
+│
+├── experiments/             # 实验脚本
+│   ├── train.py             # 训练脚本
+│   ├── evaluate.py          # 评估脚本
+│   └── compare_algorithms.py# 算法对比
+│
+├── logs/                    # 日志文件
+│
+├── models/                  # 保存的模型
+│
+├── notebooks/               # Jupyter笔记本
+│
+├── utils/                   # 工具函数
+│   ├── __init__.py
+│   ├── logger.py            # 日志工具
+│   ├── memory.py            # 经验回放
+│   └── visualizer.py        # 可视化工具
+│
+├── .gitignore               # Git忽略文件
+├── LICENSE                  # 许可证
+├── README.md                # 项目说明
+├── requirements.txt         # 项目依赖
+└── setup.py                 # 安装脚本
+```
 
 ## 安装
 
@@ -18,50 +54,52 @@ git clone https://github.com/yourusername/rl-robot-control.git
 cd rl-robot-control
 
 # 安装依赖
-pip install -r requirements.txt
-
-# 安装项目
 pip install -e .
 ```
 
-## 快速开始
+## 使用方法
 
-### 训练一个智能体
-
-```bash
-python experiments/train.py --config configs/ppo_config.yaml --task pick_place
-```
-
-### 评估训练好的模型
+### 训练模型
 
 ```bash
-python experiments/evaluate.py --model models/ppo_pick_place_best.pt --episodes 10 --render
+python experiments/train.py --config configs/ppo_config.yaml
 ```
 
-### 算法对比实验
+### 评估模型
 
 ```bash
-python experiments/compare_algorithms.py --task tracking --algorithms ppo sac td3 --trials 5
+python experiments/evaluate.py --model-path models/ppo_model.pth
 ```
 
-## 项目结构
+### 算法对比
 
-- `environments/`: 机器人环境定义
-- `agents/`: 强化学习算法实现
-- `utils/`: 工具函数
-- `experiments/`: 实验脚本
-- `configs/`: 配置文件
-- `notebooks/`: 分析笔记本
-
-## 引用
-
-如果您在研究中使用了本项目，请引用:
-
+```bash
+python experiments/compare_algorithms.py
 ```
-@article{rl_robot_control2023,
-  title={基于深度强化学习的工业机器人自适应控制系统研究与实现},
-  author={Your Name},
-  journal={},
-  year={2023}
-}
-``` 
+
+## 项目特点
+
+- 基于PyTorch实现的强化学习算法
+- 使用PyBullet进行物理仿真
+- 支持多种工业机器人任务
+- 完整的训练、评估和可视化流程
+- 模块化设计，易于扩展
+
+## 依赖项
+
+- Python 3.8+
+- PyTorch 1.10+
+- Gymnasium
+- PyBullet
+- NumPy
+- Matplotlib
+- PyYAML
+- 更多依赖见requirements.txt
+
+## 贡献
+
+欢迎提交问题和拉取请求！
+
+## 许可证
+
+MIT 
