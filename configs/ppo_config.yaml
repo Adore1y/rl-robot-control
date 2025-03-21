@@ -1,0 +1,18 @@
+# PPO算法配置
+
+# 通用参数
+batch_size: 2048     # 每次更新的总样本数
+minibatch_size: 64   # 每个小批次的样本数
+random_steps: 1000   # 初始随机探索步数
+
+# PPO特定参数
+ppo:
+  hidden_dim: 256      # 隐藏层维度
+  lr: 3.0e-4           # 学习率
+  gamma: 0.99          # 折扣因子
+  gae_lambda: 0.95     # GAE lambda参数
+  clip_ratio: 0.2      # PPO裁剪比率
+  value_coef: 0.5      # 价值损失系数
+  entropy_coef: 0.01   # 熵正则化系数
+  max_grad_norm: 0.5   # 梯度裁剪阈值
+  update_epochs: 10    # 每批数据的更新次数 
